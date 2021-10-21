@@ -1,15 +1,16 @@
 import express from "express";
 import { ClientRoutes } from "./routes";
 import db from "./database/connection";
-import { PORT } from "./utils/constants";
+import { PORT, HOST } from "./utils/constants";
 class Server {
   private app;
+  private host;
   private port;
   private paths;
   constructor() {
     this.app = express();
     this.port = PORT;
-
+    this.host = HOST;
     this.paths = {
       clients: "/api/clients",
     };
@@ -42,7 +43,7 @@ class Server {
   }
 
   listen() {
-    this.app.listen(this.port, () => {
+    this.app.listen(this.port as number, this.host, () => {
       console.log("Server on port : ", this.port);
     });
   }
