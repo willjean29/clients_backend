@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import { ClientRoutes } from "./routes";
 import db from "./database/connection";
 import { PORT, HOST } from "./utils/constants";
@@ -34,6 +35,7 @@ class Server {
   }
 
   middlewares() {
+    this.app.use(cors());
     this.app.use(express.json());
     this.app.use(express.urlencoded({ extended: false }));
   }
